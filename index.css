@@ -1,0 +1,31 @@
+body {
+    background-color: #131313;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px;
+    background-color: #1E1E1E;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.left, .center, .right {
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    justify-content: center;
+    flex: 1;
+}
+
+.right h3 {
+    margin-left: 20px;
+}
+
+h4 {
+    color: #7C7C7C;
+}
