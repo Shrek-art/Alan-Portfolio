@@ -26,6 +26,37 @@ header {
     margin-left: 20px;
 }
 
+h3, h4 {
+    font-family: Arial;
+}
+
 h4 {
     color: #7C7C7C;
+}
+
+.rectangle {
+    width: 90vw;
+    height: 70vh;
+    border: 2px solid #A488BF;
+    border-radius: 12px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.rectangle h2 {
+    margin: 0;
+    color: #E0E0E0;
+    font-family: Arial;
+}
+
+.image {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: auto;
+    opacity: 0.4;
 }
