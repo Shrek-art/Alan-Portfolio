@@ -8,26 +8,56 @@
     
     <body>
         <header>
-            <div class = "left">
-                <h3>Logo</h3>
-            </div>
+            <div class="left">
+        <h3>Logo</h3>
+    </div>
 
-            <div class = "center">
-                <h4>Alan Jiglitchi</h4>
-            </div>
+    <div class="center">
+        <h4>Alan Jiglitchi</h4>
+    </div>
 
-            <div class = "right">
-                <img src="sun-74.png" class="theme-changer" id="themeBtn">
-                <h3>Profile</h3>
-                <h3>Projects</h3>
-                <h3>Contact</h3>
-            </div>
-        </header>
+    <div class="right">
+        <img src="sun-74.png" class="theme-changer" id="themeBtn">
+        <h3>Profile</h3>
+        <h3 id="projects-btn">Projects</h3>
+        <h3>Contact</h3>
+    </div>
+</header>
 
-        <div class = "rectangle">
-            <h2>This is my portfolio!</h2>
-            <img src ="blurred-man.png" class="image">
+        <div id="main-content">
+    <div class="rectangle">
+        <h2>This is my portfolio!</h2>
+        <img src="blurred-man.png" class="image">
+    </div>
+</div>
+ 
+    <div id="projects-section" style="display:none;">
+
+    <!-- Nav bar pentru categorii -->
+    <div class="projects-nav">
+        <button class="project-tab active" data-category="Photoshop">Photoshop</button>
+        <button class="project-tab" data-category="Digital">Digital Drawings</button>
+        <button class="project-tab" data-category="Traditional">Traditional Drawings</button>
+    </div>
+
+    <h2>My Projects</h2>
+
+    <div class="projects-container">
+        <!-- Proiecte Photoshop -->
+        <div class="project" data-category="Photoshop">
+            <img src="dio.jpg" class="project-img">
+            <h3>Photoshop Project 1</h3>
         </div>
+        <div class="project" data-category="Photoshop">
+            <img src="jotaro.jpg" class="project-img">
+            <h3>Photoshop Project 2</h3>
+        </div>
+
+        <!-- Alte categorii vor fi adăugate mai târziu -->
+    </div>
+</div>
+
+
     <script src="index.js"></script>
     </body>
 </html>
