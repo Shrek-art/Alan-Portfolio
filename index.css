@@ -41,7 +41,7 @@ header {
 }
 
 .logo {
-    height: 60px;   /* ajustează cât vrei */
+    height: 50px;
     width: auto;
     display: block;
 }
@@ -201,3 +201,52 @@ h3, h4 {
     background-color: #A488BF;
     color: #1E1E1E;
 }
+
+/* ============================= */
+/*           SEARCH BAR          */
+/* ============================= */
+
+#search-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    transition: 0.3s ease;
+}
+
+#search-bar-container.search-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== DARK THEME ===== */
+#search-input {
+    width: 50%;
+    padding: 10px 15px;
+    background-color: #1E1E1E;
+    border: 2px solid #A488BF;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+#search-input:focus {
+    box-shadow: 0 0 10px #A488BF;
+    border-color: white;
+}
+
+/* ===== LIGHT THEME ===== */
+body.light-theme #search-input {
+    background-color: #F2F2F2;   /* gri deschis, elegant */
+    border-color: #A488BF;
+    color: #1E1E1E;
+}
+
+body.light-theme #search-input:focus {
+    box-shadow: 0 0 10px #A488BF;
+    border-color: #7A5FA2;
+}
+
+
