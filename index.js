@@ -1,108 +1,85 @@
-// =============================
-//      THEME SWITCHER
-// =============================
-const themeBtn = document.getElementById('themeBtn');
+// THEME SWITCHER
+const themeBtn = document.getElementById("themeBtn");
 const body = document.body;
 
-themeBtn.addEventListener('click', () => {
-    body.classList.toggle('light-theme');
-
-    // Forțăm reîmprospătarea stilului la search bar
-    if (searchInput) {
-        searchInput.classList.toggle("light-mode");
-    }
+themeBtn.addEventListener("click", () => {
+    body.classList.toggle("light-theme");
 });
 
-// =============================
-//      PROJECTS BUTTON
-// =============================
-const projectsBtn = document.getElementById('projects-btn');
-const mainContent = document.getElementById('main-content');
-const projectsSection = document.getElementById('projects-section');
+// PROJECTS BUTTON
+const projectsBtn = document.getElementById("projects-btn");
+const mainContent = document.getElementById("main-content");
+const projectsSection = document.getElementById("projects-section");
+const profileSection = document.getElementById("profile-section");
+const searchContainer = document.getElementById("search-bar-container");
+const searchInput = document.getElementById("search-input");
 
-projectsBtn.addEventListener('click', () => {
-    mainContent.style.display = 'none';
-    projectsSection.style.display = 'block';
-
-    // ascundem search bar-ul dacă intrăm pe Projects normal
-    searchContainer.classList.add('search-hidden');
+projectsBtn.addEventListener("click", () => {
+    mainContent.style.display = "none";
+    profileSection.style.display = "none";
+    projectsSection.style.display = "block";
+    searchContainer.classList.add("search-hidden");
 });
 
-// =============================
-//      TABS (Photoshop / Digital / Traditional)
-// =============================
-const tabs = document.querySelectorAll('.project-tab');
-const projects = document.querySelectorAll('.project');
+// TABS
+const tabs = document.querySelectorAll(".project-tab");
+const projects = document.querySelectorAll(".project");
 
 tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
 
-        // active tab
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const category = tab.getAttribute('data-category');
+        const category = tab.getAttribute("data-category");
 
         projects.forEach(project => {
-            if (project.getAttribute('data-category') === category) {
-                project.style.display = 'block';
-            } else {
-                project.style.display = 'none';
-            }
+            project.style.display =
+                project.getAttribute("data-category") === category ? "block" : "none";
         });
     });
 });
 
-// =============================
-//      HOME BUTTON (Alan Jiglitchi)
-// =============================
-const homeBtn = document.getElementById('home-btn');
+// HOME BUTTON (Alan Jiglitchi)
+const homeBtn = document.getElementById("home-btn");
 
-homeBtn.addEventListener('click', () => {
+homeBtn.addEventListener("click", () => {
+    mainContent.style.display = "none";
+    profileSection.style.display = "none";
+    projectsSection.style.display = "block";
 
-    // Afișăm Projects automat
-    mainContent.style.display = 'none';
-    projectsSection.style.display = 'block';
-
-    // Afișăm search bar-ul
-    searchContainer.classList.remove('search-hidden');
-
-    // Resetăm input-ul și afișăm tot
+    searchContainer.classList.remove("search-hidden");
     searchInput.value = "";
     filterProjects("");
 });
 
-// =============================
-//      SEARCH BAR FUNCTIONALITY
-// =============================
-const searchContainer = document.getElementById('search-bar-container');
-const searchInput = document.getElementById('search-input');
-
-// Filtrare live
-searchInput.addEventListener('input', () => {
+// SEARCH
+searchInput.addEventListener("input", () => {
     filterProjects(searchInput.value.toLowerCase());
 });
 
 function filterProjects(text) {
     projects.forEach(project => {
         const title = project.querySelector("h3").textContent.toLowerCase();
-
-        if (title.includes(text)) {
-            project.style.display = "block";
-        } else {
-            project.style.display = "none";
-        }
+        project.style.display = title.includes(text) ? "block" : "none";
     });
 }
 
-// =============================
-//      LOGO -> HOME PAGE
-// =============================
-const logoBtn = document.getElementById('logo-btn');
+// LOGO → HOME
+const logoBtn = document.getElementById("logo-btn");
 
-logoBtn.addEventListener('click', () => {
-    mainContent.style.display = 'block';
-    projectsSection.style.display = 'none';
+logoBtn.addEventListener("click", () => {
+    mainContent.style.display = "block";
+    projectsSection.style.display = "none";
+    profileSection.style.display = "none";
+    searchContainer.classList.add("search-hidden");
+});
 
-    searchContainer.classList.add('search-hidden');
+// PROFILE BUTTON
+const profileBtn = document.getElementById("profile-btn");
+
+profileBtn.addEventListener("click", () => {
+    mainContent.style.display = "none";
+    projectsSection.style.display = "none";
+    profileSection.style.display = "block";
+    searchContainer.classList.add("search-hidden");
 });
