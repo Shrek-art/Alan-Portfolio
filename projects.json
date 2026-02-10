@@ -1,0 +1,10 @@
+[
+  { "title": "Photoshop Project 1", "image": "imagini/dio.jpg", "category": "Photoshop" },
+  { "title": "Photoshop Project 2", "image": "imagini/jotaro.jpg", "category": "Photoshop" },
+
+  { "title": "Digital Drawing 1", "image": "imagini/volleyball1.jpg", "category": "Digital" },
+  { "title": "Digital Drawing 2", "image": "imagini/hustler.jpg", "category": "Digital" },
+
+  { "title": "Traditional Drawing 1", "image": "imagini/Portofoliu_1.jpg", "category": "Traditional" },
+  { "title": "Traditional Drawing 2", "image": "imagini/Portofoliu_2.jpg", "category": "Traditional" }
+]
