@@ -125,3 +125,10 @@ function initProjectLogic() {
         });
     });
 }
+
+const input = document.getElementById("live-input");
+const output = document.getElementById("live-output");
+
+input.addEventListener("input", () => {
+    output.textContent = input.value;
+});

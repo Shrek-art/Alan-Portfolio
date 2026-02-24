@@ -12,6 +12,21 @@ body.light-theme {
     color: black;
 }
 
+.container {
+    height: 40px;             
+    display: flex;
+    align-items: flex-end;
+}
+
+#live-input {
+    color: white;
+    background-color: #1E1E1E;
+    margin-top: 10px;
+}
+
+#live-output {
+    color: white;
+}
 /* HEADER */
 header {
     display: flex;
