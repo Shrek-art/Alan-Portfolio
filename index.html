@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,7 @@
 </head>
 
 <body>
+
 <header>
     <div class="left">
         <img src="imagini/A-logo-01.png" class="logo" id="logo-btn">
@@ -24,7 +24,9 @@
         <h3>Contact</h3>
     </div>
 </header>
-    <div class="live-container">
+
+<!-- LIVE FORM -->
+<div class="live-container">
     <form id="live-form">
         <input type="text" id="live-input" placeholder="Scrie ceva...">
     </form>
@@ -43,29 +45,34 @@
     </div>
 </div>
 
-<!-- PROJECTS SECTION -->
+<!-- PROJECTS -->
 <div id="projects-section" style="display:none;">
     <div class="projects-container" id="projects-container">
-        <!-- Proiectele vor fi generate din JS -->
+    </div>
+
+    <!-- ADD IMAGE BY LINK -->
+    <div class="add-image-container">
+        <input type="text" id="image-link-input" placeholder="Pune link-ul imaginii aici...">
+        <button id="add-image-btn">Add Image</button>
     </div>
 </div>
 
-</div>
-
-<!-- PROFILE SECTION -->
+<!-- PROFILE -->
 <div id="profile-section" style="display:none;">
     <div class="profile-card">
         <img src="imagini/zoro.jpg" id="profile-image">
         <h2>My Profile</h2>
-        <p id="bio-text">My name is Alan. I'm 17 years old. I am a student at the CUTM , 2nd year. My specialty is Web-Designer. I hope you like my customized portfolio</p>
+        <p id="bio-text">
+            My name is Alan. I'm 17 years old. I am a student at the CUTM,
+            2nd year. My specialty is Web-Designer.
+            I hope you like my customized portfolio
+        </p>
     </div>
 </div>
 
 <p id="test-click" style="cursor:pointer; font-size:20px; color:white;">
     Apasă pe mine
 </p>
-
-
 
 <script src="index.js"></script>
 </body>
