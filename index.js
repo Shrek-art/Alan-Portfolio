@@ -6,6 +6,12 @@ const body = document.body;
 
 themeBtn.addEventListener("click", () => {
     body.classList.toggle("light-theme");
+
+    if (body.classList.contains("light-theme")) {
+        document.cookie = "theme=light; path=/;";
+    } else {
+        document.cookie = "theme=dark; path=/;";
+    }
 });
 
 // =====================
@@ -19,58 +25,61 @@ const searchContainer = document.getElementById("search-bar-container");
 const searchInput = document.getElementById("search-input");
 
 // =====================
-// HOME BUTTON
+// NAVIGATION BUTTONS
 // =====================
-const homeBtn = document.getElementById("home-btn");
-homeBtn.addEventListener("click", () => {
+document.getElementById("home-btn").addEventListener("click", () => {
     mainContent.style.display = "block";
     profileSection.style.display = "none";
     projectsSection.style.display = "none";
     searchContainer.classList.add("search-hidden");
-    searchInput.value = "";
 });
 
-// =====================
-// LOGO BUTTON
-// =====================
-const logoBtn = document.getElementById("logo-btn");
-logoBtn.addEventListener("click", () => {
+document.getElementById("logo-btn").addEventListener("click", () => {
     mainContent.style.display = "block";
     projectsSection.style.display = "none";
     profileSection.style.display = "none";
     searchContainer.classList.add("search-hidden");
 });
 
-// =====================
-// PROFILE BUTTON
-// =====================
-const profileBtn = document.getElementById("profile-btn");
-profileBtn.addEventListener("click", () => {
+document.getElementById("profile-btn").addEventListener("click", () => {
     mainContent.style.display = "none";
     projectsSection.style.display = "none";
     profileSection.style.display = "block";
     searchContainer.classList.add("search-hidden");
 });
 
-// =====================
-// PROJECTS BUTTON
-// =====================
-const projectsBtn = document.getElementById("projects-btn");
-projectsBtn.addEventListener("click", () => {
+document.getElementById("projects-btn").addEventListener("click", () => {
     mainContent.style.display = "none";
     profileSection.style.display = "none";
     projectsSection.style.display = "block";
     searchContainer.classList.remove("search-hidden");
-    searchInput.value = "";
 });
 
 // =====================
-// FETCH PROJECTS FROM JSON
+// LIVE FORM – ENTER → UPPERCASE
+// =====================
+const form = document.getElementById("live-form");
+const input = document.getElementById("live-input");
+const output = document.getElementById("live-output");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const textUpper = input.value.toUpperCase();
+    output.textContent = textUpper;
+
+    input.value = "";
+});
+
+// =====================
+// FETCH PROJECTS
 // =====================
 fetch("projects.json")
     .then(res => res.json())
     .then(projectsData => {
+
         projectsData.forEach(p => {
+
             const projectDiv = document.createElement("div");
             projectDiv.classList.add("project");
             projectDiv.setAttribute("data-category", p.category);
@@ -84,10 +93,10 @@ fetch("projects.json")
 
             projectDiv.appendChild(img);
             projectDiv.appendChild(title);
+
             projectsContainer.appendChild(projectDiv);
         });
 
-        // Abia după ce proiectele există legăm logica tabs și search
         initProjectLogic();
     })
     .catch(err => {
@@ -95,40 +104,84 @@ fetch("projects.json")
     });
 
 // =====================
-// FUNCTION: INIT PROJECT LOGIC
+// SEARCH LOGIC
 // =====================
 function initProjectLogic() {
-    const tabs = document.querySelectorAll(".project-tab");
+
     const projects = document.querySelectorAll(".project");
 
-    // TAB CLICK
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            const category = tab.dataset.category;
-
-            projects.forEach(project => {
-                project.style.display =
-                    project.dataset.category === category ? "block" : "none";
-            });
-        });
-    });
-
-    // SEARCH FILTER
     searchInput.addEventListener("input", () => {
-        const text = searchInput.value.toLowerCase();
+
+        const text = searchInput.value.toUpperCase();
+
         projects.forEach(project => {
-            const title = project.querySelector("h3").textContent.toLowerCase();
-            project.style.display = title.includes(text) ? "block" : "none";
+            const title = project.querySelector("h3").textContent.toUpperCase();
+
+            if (title.includes(text)) {
+                project.style.display = "block";
+            } else {
+                project.style.display = "none";
+            }
         });
+
     });
 }
 
-const input = document.getElementById("live-input");
-const output = document.getElementById("live-output");
+// =====================
+// ADD IMAGE BY LINK (PERSISTENT)
+// =====================
+const imageInput = document.getElementById("image-link-input");
+const addImageBtn = document.getElementById("add-image-btn");
 
-input.addEventListener("input", () => {
-    output.textContent = input.value;
+addImageBtn.addEventListener("click", () => {
+
+    const link = imageInput.value.trim();
+    if (link === "") return;
+
+    const projectDiv = document.createElement("div");
+    projectDiv.classList.add("project");
+
+    const img = document.createElement("img");
+    img.src = link;
+    img.classList.add("project-img");
+
+    const title = document.createElement("h3");
+    title.textContent = "Custom Image";
+
+    projectDiv.appendChild(img);
+    projectDiv.appendChild(title);
+
+    projectsContainer.appendChild(projectDiv);
+
+    let savedImages = JSON.parse(localStorage.getItem("customImages")) || [];
+    savedImages.push(link);
+    localStorage.setItem("customImages", JSON.stringify(savedImages));
+
+    imageInput.value = "";
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    let savedImages = JSON.parse(localStorage.getItem("customImages")) || [];
+
+    savedImages.forEach(link => {
+
+        const projectDiv = document.createElement("div");
+        projectDiv.classList.add("project");
+
+        const img = document.createElement("img");
+        img.src = link;
+        img.classList.add("project-img");
+
+        const title = document.createElement("h3");
+        title.textContent = "Custom Image";
+
+        projectDiv.appendChild(img);
+        projectDiv.appendChild(title);
+
+        projectsContainer.appendChild(projectDiv);
+    });
+
+});
+
+//localStorage.removeItem("customImages");
