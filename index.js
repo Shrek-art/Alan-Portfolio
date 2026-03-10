@@ -25,7 +25,7 @@ const searchContainer = document.getElementById("search-bar-container");
 const searchInput = document.getElementById("search-input");
 
 // =====================
-// NAVIGATION BUTTONS
+// NAVIGATION
 // =====================
 document.getElementById("home-btn").addEventListener("click", () => {
     mainContent.style.display = "block";
@@ -56,7 +56,7 @@ document.getElementById("projects-btn").addEventListener("click", () => {
 });
 
 // =====================
-// LIVE FORM – ENTER → UPPERCASE
+// LIVE FORM
 // =====================
 const form = document.getElementById("live-form");
 const input = document.getElementById("live-input");
@@ -115,6 +115,7 @@ function initProjectLogic() {
         const text = searchInput.value.toUpperCase();
 
         projects.forEach(project => {
+
             const title = project.querySelector("h3").textContent.toUpperCase();
 
             if (title.includes(text)) {
@@ -123,19 +124,25 @@ function initProjectLogic() {
                 project.style.display = "none";
             }
         });
-
     });
 }
 
 // =====================
-// ADD IMAGE BY LINK (PERSISTENT)
+// ADD IMAGE SYSTEM (PERSISTENT)
 // =====================
 const imageInput = document.getElementById("image-link-input");
+const imageNameInput = document.getElementById("image-name-input");
 const addImageBtn = document.getElementById("add-image-btn");
+
+imageNameInput.addEventListener("change", () => {
+    imageNameInput.value = imageNameInput.value.toUpperCase();
+});
 
 addImageBtn.addEventListener("click", () => {
 
     const link = imageInput.value.trim();
+    const imageName = imageNameInput.value.trim();
+
     if (link === "") return;
 
     const projectDiv = document.createElement("div");
@@ -146,35 +153,45 @@ addImageBtn.addEventListener("click", () => {
     img.classList.add("project-img");
 
     const title = document.createElement("h3");
-    title.textContent = "Custom Image";
+    title.textContent = imageName !== "" ? imageName : "UNTITLED IMAGE";
 
     projectDiv.appendChild(img);
     projectDiv.appendChild(title);
 
     projectsContainer.appendChild(projectDiv);
 
+    // Salvare în localStorage
     let savedImages = JSON.parse(localStorage.getItem("customImages")) || [];
-    savedImages.push(link);
+
+    savedImages.push({
+        link: link,
+        name: title.textContent
+    });
+
     localStorage.setItem("customImages", JSON.stringify(savedImages));
 
     imageInput.value = "";
+    imageNameInput.value = "";
 });
 
+// =====================
+// LOAD CUSTOM IMAGES AFTER REFRESH
+// =====================
 window.addEventListener("DOMContentLoaded", () => {
 
     let savedImages = JSON.parse(localStorage.getItem("customImages")) || [];
 
-    savedImages.forEach(link => {
+    savedImages.forEach(item => {
 
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");
 
         const img = document.createElement("img");
-        img.src = link;
+        img.src = item.link;
         img.classList.add("project-img");
 
         const title = document.createElement("h3");
-        title.textContent = "Custom Image";
+        title.textContent = item.name;
 
         projectDiv.appendChild(img);
         projectDiv.appendChild(title);
